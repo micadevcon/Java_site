@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="5.0">
+  <display-name>ProjectServer1</display-name>
+  <welcome-file-list>
+    <welcome-file>Index</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description></description>
+    <display-name>FirstServlet</display-name>
+    <servlet-name>FirstServlet</servlet-name>
+    <servlet-class>ru.unlimit.FirstServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FirstServlet</servlet-name>
+    <url-pattern>/FirstServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Registration</display-name>
+    <servlet-name>Registration</servlet-name>
+    <servlet-class>ru.unlimit.Registration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registration</servlet-name>
+    <url-pattern>/Registration</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Autorization</display-name>
+    <servlet-name>Autorization</servlet-name>
+    <servlet-class>ru.unlimit.Autorization</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Autorization</servlet-name>
+    <url-pattern>/Autorization</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Index</display-name>
+    <servlet-name>Index</servlet-name>
+    <jsp-file>/JspFiles/Index.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+    <description></description>
+    <display-name>Data</display-name>
+    <servlet-name>Data</servlet-name>
+    <jsp-file>/JspFiles/Data.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Data</servlet-name>
+    <url-pattern>/Data</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
