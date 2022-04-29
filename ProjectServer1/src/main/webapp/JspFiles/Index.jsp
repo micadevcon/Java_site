@@ -5,29 +5,35 @@
 <html>
 <head>
 <meta charset="Cp1251">
+<link rel="stylesheet" type="text/css" href="/ProjectServer1/public/style.css">
 <title>Меню</title>
 </head>
 <body>
-<div align="right">
-<%
+ <header>
+      <div class="main_menu">
+          <a class="menu menu_position " href="/ProjectServer1/Registration">Регистрация</a>
+          <a class="menu menu_position" href="/ProjectServer1/Catalog">Магазин</a>
+          <a class="menu menu_position menu_now" href="/ProjectServer1/Autorization">Авторизация</a>
+      <div align="center" class="main_menu">
+      <%
 	//if(GetCookie.GetCookie(request, "name") !=null)
 	//	String user= (String) session.getAttribute("current_name");
-
+	
     if(session.getAttribute("current_name") != null)
-	  	out.println("Пользователь: "+GetCookie.GetCookie(request, "name")+"\n");
+	  	out.println("<a class=\"menu \">"+"Пользователь: "+GetCookie.GetCookie(request, "name")+"</a>");
 	else
-		{
-			out.println("Неавторизованный пользователь");
-			out.println("<br><a href='http://localhost:8080/ProjectServer1/Registration'>Регистрация</a> или");
-			out.println("<a href='http://localhost:8080/ProjectServer1/Autorization'>Авторизация</a>");
-		}
-%>		
+		{%>
+			"<a class=\"menu\">Неавторизованный пользователь</a>"
+			<br><a href='http://localhost:8080/ProjectServer1/Autorization'>Войти\Зарегистрироваться</a>
+		<%} %>
+    
+		</div>
+      </div>
+
+    </header>
+<div align="right">
+
 </div>
-<h1>Добро пожаловать на сайт</h1>
+<h1 class="menu">Добро пожаловать на сайт</h1>
 
-
-<p> <a href="http://localhost:8080/ProjectServer1/Registration">Регистрация</a> </p>
-<p> <a href="http://localhost:8080/ProjectServer1/Autorization">Авторизация</a> </p>
-<p> <a href="http://localhost:8080/ProjectServer1/Data">Личные данные</a> </p>
-</body>
 </html>

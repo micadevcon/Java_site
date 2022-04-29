@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import ru.classes.ConnectBase;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,9 +17,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.TimeUnit;
 
 
-public class Autorization extends HttpServlet {
+public class Autorization extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     
@@ -28,66 +32,69 @@ public class Autorization extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//кодировка
+//		//кодировка
 		request.setCharacterEncoding("Cp1251");
 		response.setCharacterEncoding("Cp1251");
-			
-		PrintWriter pw = response.getWriter();
-		pw.println("<html>");
-		
-		pw.println("<form action=\"\" method=\"post\">");
-		
-		pw.println("<div> почта: </div>");
-	    pw.println("<input type=\"text\" name=\"Email\" value=\"\"\n" + "size=\"30\"/>");
-        
-	    pw.println("<div> пароль: </div>");
-        pw.println("<input type=\"text\" name=\"Password\" value=\"\"\n" + "size=\"30\"/>");
-       
-        pw.println(" <button type=\"submit\">Send your message</button>");
-        pw.println("</form>");
-        pw.println("</html>");
+		//подключение jsp
+		String path = "/JspFiles/login.jsp";
+        ServletContext servletContext = getServletContext();
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+        requestDispatcher.forward(request, response);
+
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		//кодировка
-				request.setCharacterEncoding("Cp1251");
-				response.setCharacterEncoding("Cp1251");
-				PrintWriter pw = response.getWriter();
-				pw.println("<html>");
-				Connection connect=ConnectBase.GetConnection();
-				Statement statement =ConnectBase.GetStatementBase(connect);
-				ResultSet result = null;
-				 try {
-			        	result = statement.executeQuery("select имя from Autorization where "
-			        			+ "email= '"+ request.getParameter("Email")+"' and "
-			        			+ "пароль= '"+ request.getParameter("Password")
-			        			+ "' ;");
-			        
-			        	if (result.next())
-			        	{ 
-			        		//за проверку
-			        		HttpSession session = request.getSession();
-			        		session.setAttribute("current_name",(int) 1);
-			        		session.setMaxInactiveInterval(-1);
-			        		// за выдачу имени
-			        		Cookie cookie = new Cookie("name",result.getString(1));
-				    			pw.println("Добрый день:\n");
-				    			cookie.setMaxAge(60);
-				    			response.addCookie(cookie);
-				                pw.println(result.getString(1)+"\n");
-				           
-				    			statement.close();
-				    			connect.close();
-				        }
-			        	else
-			        		pw.println("Неверные данные\n");
-			        	}
-			    			
-			        catch (SQLException throwables) 
-			        {
-						throwables.printStackTrace();
-			        }
+		request.setCharacterEncoding("Cp1251");
+		response.setCharacterEncoding("Cp1251");
+		
+		PrintWriter pw = response.getWriter();
+		Connection connect=ConnectBase.GetConnection();
+		Statement statement =ConnectBase.GetStatementBase(connect);
+		ResultSet result = null;
+		 try {
+	        	result = statement.executeQuery("select имя from Autorization where "
+	        			+ "email= '"+ request.getParameter("Email")+"' and "
+	        			+ "пароль= '"+ request.getParameter("Password")
+	        			+ "' ;");
+	        
+	        	if (result.next())
+	        	{ 
+	        		//за проверку
+	        		HttpSession session = request.getSession();
+	        		session.setAttribute("current_name",(int) 1);
+	        		session.setMaxInactiveInterval(-1);
+	        		// за выдачу имени
+	        		Cookie cookie = new Cookie("name",result.getString(1));
+//		    			pw.println("Добрый день:\n");
+		    			cookie.setMaxAge(60);
+		    			response.addCookie(cookie);
+//		                pw.println(result.getString(1)+"\n");
+		           
+		    			statement.close();
+		    			connect.close();
+		    			response.sendRedirect("http://localhost:8080/ProjectServer1");	
+		        }
+	        	else 
+	        	{
+	        		pw.println("alert(\"Неверные данные\");\n");
+	        		try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	        		response.sendRedirect("http://localhost:8080/ProjectServer1/Autorization");	
+	        	}
+	        }
+	        	
+		    			
+		        catch (SQLException throwables) 
+		        {
+					throwables.printStackTrace();
+		        }
 	}
 
 }

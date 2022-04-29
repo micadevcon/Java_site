@@ -9,7 +9,7 @@ public class ConnectBase {
 	
 	public static Connection GetConnection() {
 		
-		final String URL="jdbc:sqlite:C:/Users/micad/eclipse-workspace/ProjectServer1/src/main/bd/base.db";
+		final String URL="jdbc:sqlite:C:/Users/micad/Downloads/учеба/3 курс/2 семестр/СТИП/1-4/Java_site/ProjectServer1/src/main/bd/base.db";
         Connection connectionBase = null;
         try {
         	try {

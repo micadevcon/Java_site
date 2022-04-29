@@ -4,18 +4,6 @@
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>
-  
-  <servlet>
-    <description></description>
-    <display-name>FirstServlet</display-name>
-    <servlet-name>FirstServlet</servlet-name>
-    <servlet-class>ru.unlimit.FirstServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FirstServlet</servlet-name>
-    <url-pattern>/FirstServlet</url-pattern>
-  </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>Registration</display-name>
@@ -26,7 +14,6 @@
     <servlet-name>Registration</servlet-name>
     <url-pattern>/Registration</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>Autorization</display-name>
@@ -37,7 +24,6 @@
     <servlet-name>Autorization</servlet-name>
     <url-pattern>/Autorization</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>Index</display-name>
@@ -47,17 +33,30 @@
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
     <url-pattern>/Index</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
+  </servlet-mapping>
+  <servlet>
     <description></description>
-    <display-name>Data</display-name>
-    <servlet-name>Data</servlet-name>
-    <jsp-file>/JspFiles/Data.jsp</jsp-file>
+    <display-name>Catalog</display-name>
+    <servlet-name>Catalog</servlet-name>
+    <jsp-file>/JspFiles/Catalog.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Data</servlet-name>
-    <url-pattern>/Data</url-pattern>
+    <servlet-name>Catalog</servlet-name>
+    <url-pattern>/Catalog</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/public/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Pages</display-name>
+    <servlet-name>Pages</servlet-name>
+    <servlet-class>ru.unlimit.Page</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pages</servlet-name>
+    <url-pattern>/Pages</url-pattern>
+  </servlet-mapping>
 </web-app>
