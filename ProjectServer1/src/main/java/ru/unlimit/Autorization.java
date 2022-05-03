@@ -54,6 +54,15 @@ public class Autorization extends HttpServlet
 		Connection connect=ConnectBase.GetConnection();
 		Statement statement =ConnectBase.GetStatementBase(connect);
 		ResultSet result = null;
+		if(request.getParameter( "kill" )!=null)
+		{
+			HttpSession session = request.getSession();
+			session.setAttribute("current_name",null);
+			Cookie cookie = new Cookie("name",null);
+			response.sendRedirect("http://localhost:8080/Store");	
+		}
+		else 
+		{
 		 try {
 	        	result = statement.executeQuery("select имя from Autorization where "
 	        			+ "email= '"+ request.getParameter("Email")+"' and "
@@ -75,26 +84,28 @@ public class Autorization extends HttpServlet
 		           
 		    			statement.close();
 		    			connect.close();
-		    			response.sendRedirect("http://localhost:8080/ProjectServer1");	
+		    			response.sendRedirect("http://localhost:8080/Store");	
 		        }
 	        	else 
 	        	{
 	        		pw.println("alert(\"Неверные данные\");\n");
 	        		try {
-						TimeUnit.SECONDS.sleep(1);
+						TimeUnit.SECONDS.sleep(2);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	        		response.sendRedirect("http://localhost:8080/ProjectServer1/Autorization");	
+	        		response.sendRedirect("http://localhost:8080/Store/Autorization");	
+	        		
 	        	}
 	        }
 	        	
-		    			
+		
 		        catch (SQLException throwables) 
 		        {
 					throwables.printStackTrace();
 		        }
+		}
 	}
 
 }

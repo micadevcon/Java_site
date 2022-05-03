@@ -5,30 +5,35 @@
 <html>
 <head>
 <meta charset="Cp1251">
+ <link rel="stylesheet" type="text/css" href="/Store/public/login.css">
+    <link rel="stylesheet" type="text/css" href="/Store/public/style.css">
 <title>Товар</title>
 </head>
 <body>
-<div align="center">
-<%
-request.setCharacterEncoding("Cp1251");
-response.setCharacterEncoding("Cp1251");
-	//if(GetCookie.GetCookie(request, "name") ==null)
-    if(session.getAttribute("current_name") == null)
+<header>
+      <div class="header-top">
+        <a href="/Store/" >главная</a>
+        <a href="/Store/Catalog"> Магазин</a>
+                <a href="/Store/Report"> Связаться с нами</a>
+        <div class="header-right">
+        <% if(session.getAttribute("current_name") == null)
 	  	{%>
-		Неавторизованный пользователь
-		<br><a href='http://localhost:8080/ProjectServer1/Registration'>Регистрация</a> или
-		<a href='http://localhost:8080/ProjectServer1/Autorization'>Авторизация</a>
+		<a href="/Store/Autorization"> Авторизация\Регистрация</a>
 		
-<%}
-	else 
+		<%} 
+        else{%>
+        Пользователь:<%= GetCookie.GetCookie(request, "name")%>
+        <form method="POST" action="/Store/Autorization">
+        <input  type="submit" value="Выйти из аккаунта" name="kill">
+        </form>
+        <%}%>
+        </div>
+        </div>
+        
+    </header>
+
 	
-	 	{
-			out.println("Пользователь: "+GetCookie.GetCookie(request, "name")+"\n");
-%>		
-<br>Секретная информация, доступная авторизированным пользователям
-</div>
-		<%} %>
-	<div >
+	<div  class="page-title">
 	<% 
 			String id=request.getParameter("id");
 			PrintWriter pw = response.getWriter();
@@ -41,13 +46,26 @@ response.setCharacterEncoding("Cp1251");
 		        	while (result.next())
 		        	{%>
 		        	
-		        	<div  align="left" >
-		        	
-		        	<img src="/ProjectServer1/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
-		        	<div align="left">
-		        	<p> Имя товара:<%= result.getString("name") %> </p>
-		        	<p>цена:<%= result.getInt("price") %></p>
-		        	<p>дата добавления:<%= result.getString("data") %></p>
+		        	<div  class="page-data" >
+		        	<div class="page-margin">
+		        		<img src="/Store/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="300px"><br>
+			        	<p><%= result.getInt("price") %>₽</p>
+				        <p>дата добавления:<%= result.getString("data") %></p>
+				       <%
+			if(session.getAttribute("current_name") == null)
+	  	{%>
+        				<input  type="submit" value="Купить" onclick="alert('Вы не авторизованы')" name="buy">
+        				<%} 
+			else{
+        				%>
+        				<input  type="submit" value="Купить" onclick="alert('<%= GetCookie.GetCookie(request, "name")%>, на данный момент продажи прекращены.')" name="buy">
+		        	<%} %>
+		        	</div>
+			        	
+		        	<div>
+			        	<strong><p><%= result.getString("name") %> </p></strong>
+			        	<br>
+			        	<p><%= result.getString("description") %></p>
 		        	</div>
 		        	<br>
 		        	</div>
@@ -66,12 +84,21 @@ response.setCharacterEncoding("Cp1251");
 		        	
 	%>
 	</div>
+	<div class="page-title">
 	Последние комментарии:
+	<br><br>
+	<hr>
 	<%
 	ResultSet resultComment = null;
 			try {
 				resultComment = statement.executeQuery("select * FROM Comments where Notes_id="+id);
-			 
+				if (!result.next())
+	        	{%>
+	        	<div>Комментарии еще никто оставил. Мы можете стать первым!</div>
+	        	<br><br>
+	        	<hr>
+	        	<% } 
+				resultComment = statement.executeQuery("select * FROM Comments where Notes_id="+id);
 		        	while (resultComment.next())
 		        	{%>
 		        	
@@ -79,7 +106,7 @@ response.setCharacterEncoding("Cp1251");
 		        	
 		        	<p><%= resultComment.getString("name") %></p>
 		        	<p><%= resultComment.getString("comment") %></p>
-		        	<p><%= resultComment.getString("date") %></p>
+		        	<p align="right"><%= resultComment.getString("date") %></p>
 		        	<hr>
 		        	</div>
 		        		
@@ -95,19 +122,27 @@ response.setCharacterEncoding("Cp1251");
 	        }
 			statement.close();
 			connect.close();
+			%>
 			
+			
+			</div>
+			<br><br>
+			<div class="page-title" align="center">
+			<%
 			if(session.getAttribute("current_name") == null)
 	  	{%>
+	  	
 		Писать комментарии могут только авторизированные пользователи
-		<br><a href='http://localhost:8080/ProjectServer1/Autorization'>Войти\Зарегистрироваться</a>
+		<br><a href='http://localhost:8080/Store/Autorization'>Войти\Зарегистрироваться</a>
 		
 <%}
 	else { %>
 			<form action="" method="post">
 			<div> Комментарий: </div>
 			<input type="text" name="comment" value="" + "size="30">
-			<button type="submit">Send your message</button>
+			<button type="submit">Отправить комментарий</button>
 			</form>
 			<%}%>
+			</div>
 </body>
 </html>

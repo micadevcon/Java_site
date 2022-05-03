@@ -56,4 +56,18 @@ body {
 	color:#515151;
 	font-family: 'Lobster', cursive;
 }
+.password {
+	position: relative;
+}
+.password-control {
+	position: absolute;
+	top: 11px;
+	right: 50px;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url('images/view.svg') 0 0 no-repeat;
+}
+.password-control.view {
+	background: url('images/no-view.svg') 0 0 no-repeat;
 

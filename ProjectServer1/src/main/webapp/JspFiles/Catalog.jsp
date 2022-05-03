@@ -6,36 +6,40 @@
 <head>
 <meta charset="Cp1251">
 <title>Личный кабинет</title>
- <link rel="stylesheet" type="text/css" href="/ProjectServer1/public/style.css">
+ <link rel="stylesheet" type="text/css" href="/Store/public/style.css">
 </head>
 <body>
-<div align="center">
-<%
-	//if(GetCookie.GetCookie(request, "name") ==null)
-    if(session.getAttribute("current_name") == null)
-	  	{%>	
-    	Неавторизованный пользователь
-		<br><a href='http://localhost:8080/ProjectServer1/Autorization'>Войти\Зарегистрироваться</a>
+<header>
+      <div class="header-top">
+        <a href="/Store/" >главная</a>
+        <a href="/Store/Catalog"> Магазин</a>
+                <a href="/Store/Report"> Связаться с нами</a>
+        <div class="header-right">
+        <% if(session.getAttribute("current_name") == null)
+	  	{%>
+		<a href="/Store/Autorization"> Авторизация\Регистрация</a>
 		
-<%}
-	else 
-	
-	 	{
-			out.println("Пользователь: "+GetCookie.GetCookie(request, "name")+"\n");
-%>		
-<br>Секретная информация, доступная авторизированным пользователям
-</div>
-		<%} %>
+		<%} 
+        else{%>
+        Пользователь:<%= GetCookie.GetCookie(request, "name")%>
+        <form method="POST" action="/Store/Autorization">
+        <input  type="submit" value="Выйти из аккаунта" name="kill">
+        </form>
+        <%}%>
+        </div>
+        </div>
+        
+    </header>
 		<div>
 		<%if (request.getParameter("usersearch")==null || request.getParameter("usersearch").trim().length()==0)
 		{%>
-			<form action="/ProjectServer1/Catalog?note=">
+			<form action="/Store/Catalog?note=">
     <input type="text" name="usersearch" id="usersearch" value = "" />
     <button>Искать</button>
 		<%}
 		else
 		{%>
-			<form action="/ProjectServer1/Catalog?note=<%=request.getParameter("usersearch").trim()%>">
+			<form action="/Store/Catalog?note=<%=request.getParameter("usersearch").trim()%>">
     <input type="text" name="usersearch" id="usersearch" value = "<%=request.getParameter("usersearch").trim()%>" />
     <button>Искать</button>
 		<%}
@@ -45,7 +49,8 @@
     </form>
 			
 		</div>
-	<div class=".catalog">
+		<br>
+	<div class="catalog">
 	
 	<% 
 			
@@ -63,9 +68,9 @@
 		        	{%>
 		        	
 		        	<div class=cen >
-		        	<img object-fit="cover" height="170" width="170" src="/ProjectServer1/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
-		        	<a href="/ProjectServer1/Pages?id=<%=result.getInt("id")%>"> Имя товара:<%= result.getString("name") %> </a>
-		        	<p>цена:<%= result.getInt("price") %></p>
+		        	<img object-fit="cover" height="170" width="170" src="/Store/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
+		        	<a href="/Store/Pages?id=<%=result.getInt("id")%>"><%= result.getString("name") %> </a>
+		        	<p><%= result.getInt("price")  %>₽</p>
 		        	<p>дата добавления:<%= result.getString("data") %></p>
 		        	<br>
 		        	</div>
@@ -74,7 +79,7 @@
 		        	<% } 
 			}
 			else
-			{	String usersearch= request.getParameter("usersearch").trim();
+			{	String usersearch= request.getParameter("usersearch").trim().toLowerCase();
 				result = statement.executeQuery("select * FROM Notes where name LIKE '%"+usersearch+"%'   ");
 				if (!result.next())
 	        	{%>
@@ -86,9 +91,9 @@
 	        	{%>
 	        	
 	        	<div  align="left" >
-	        	<img src="/ProjectServer1/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
-	        	<a href="/ProjectServer1/Pages?id=<%=result.getInt("id")%>"> Имя товара:<%= result.getString("name") %> </a>
-	        	<p>цена:<%= result.getInt("price") %></p>
+	        	<img src="/Store/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
+	        	<a href="/Store/Pages?id=<%=result.getInt("id")%>"><%= result.getString("name") %> </a>
+	        	<p><%= result.getInt("price") %>₽</p>
 	        	<p>дата добавления:<%= result.getString("data") %></p>
 	        	<br>
 	        	</div>

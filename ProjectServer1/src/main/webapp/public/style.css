@@ -4,23 +4,32 @@
 }
 
 body {
-	background: url('/ProjectServer1/public/images/background.png') top left repeat;
+
+	background: url('/Store/public/images/background.png') top left repeat;
+	margin: 70px 20px 40px 20px;
 }
 
-.main_menu
-{
-}
 .catalog
 {	display: flex;
 	padding: 10px 0px 0 10px;
-	
+	font-size: 20px;
 	flex-flow: row wrap;
 	 text-align: center;
-    justify-content: left;
+    justify-content: flex-start;
+}
+.page-title{
+	font-size: 20px;
+}
+.page-data{
+	display: flex;
+	margin: 0 0 10px 0;
+}
+.page-margin{
+	margin: 0 10px 0 0;
 }
 .cen
-{
-	margin: 0 10px 0 0;
+{	width: 240px;
+	margin: 0 10px 20px 0;
 }
 .form{
 	display: flex;
@@ -33,10 +42,15 @@ body {
   border-radius:10px;
   background-color:#c0c0c0;
 }
-/* Стили бара vladmaxi, можно удалить */
-.vladmaxi-top{
+#registration_container {
+	width: 357px;
+	height: 650px;
+	margin: 100px auto;
+	background: url('images/login_bg1.png') top left no-repeat;
+}
+/* Стили бара header */
+.header-top{
 	line-height: 24px;
-	font-size: 11px;
 	background: #eee;
 	text-transform: uppercase;
 	z-index: 9999;
@@ -45,7 +59,7 @@ body {
 	left:0;
 	width:100%;
 	font-family: calibri;
-	font-size: 13px;
+	font-size: 16px;
 	box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
 	-webkit-animation: slideOut 0.5s ease-in-out 0.3s backwards;
 }
@@ -54,28 +68,18 @@ body {
 	100%{top:0px; opacity: 1;}
 }
 
-.vladmaxi-top a{
+.header-top a{
 	padding: 0px 10px;
 	letter-spacing: 1px;
 	color: #333;
 	text-shadow: 0px 1px 1px #fff;
-	display: flex;
-	float: left;
 	text-decoration:none;
 }
-.vladmaxi-top a:hover{
+.header-right{
+	float: right;
+	margin: 0 10px 0 0;
+}
+.header-top a:hover{
 	background: #fff;
-}
-.right{
-	
-  justify-content: flex-end;
-}
-.center{
- display: flex;
-  justify-content: center;
-}
-.vladmaxi-top span.right a{
-	float: left;
-	display: block;
 }
 

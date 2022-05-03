@@ -5,35 +5,42 @@
 <html>
 <head>
 <meta charset="Cp1251">
-<link rel="stylesheet" type="text/css" href="/ProjectServer1/public/style.css">
+<link rel="stylesheet" type="text/css" href="/Store/public/style.css">
 <title>Меню</title>
 </head>
 <body>
- <header>
-      <div class="main_menu">
-          <a class="menu menu_position " href="/ProjectServer1/Registration">Регистрация</a>
-          <a class="menu menu_position" href="/ProjectServer1/Catalog">Магазин</a>
-          <a class="menu menu_position menu_now" href="/ProjectServer1/Autorization">Авторизация</a>
-      <div align="center" class="main_menu">
-      <%
-	//if(GetCookie.GetCookie(request, "name") !=null)
-	//	String user= (String) session.getAttribute("current_name");
-	
-    if(session.getAttribute("current_name") != null)
-	  	out.println("<a class=\"menu \">"+"Пользователь: "+GetCookie.GetCookie(request, "name")+"</a>");
-	else
-		{%>
-			"<a class=\"menu\">Неавторизованный пользователь</a>"
-			<br><a href='http://localhost:8080/ProjectServer1/Autorization'>Войти\Зарегистрироваться</a>
-		<%} %>
-    
-		</div>
-      </div>
-
+	<header>
+		 <div class="header-top">
+		        <a href="/Store/" >главная</a>
+		        <a href="/Store/Catalog"> Магазин</a></span>
+		               <a href="/Store/Report"> Связаться с нами</a>
+		        <div class="header-right">
+			        <% if(session.getAttribute("current_name") == null)
+				  	{%>
+					<a href="/Store/Autorization"> Авторизация\Регистрация</a>
+					
+					<%} 
+			        else{%>
+			        Пользователь:<%= GetCookie.GetCookie(request, "name")%>
+			        <form method="POST" action="/Store/Autorization">
+			        <input  type="submit" value="Выйти из аккаунта" name="kill">
+			        </form>
+			        <%}%>
+		         </div>
+	      </div>
     </header>
-<div align="right">
+<div >
 
 </div>
-<h1 class="menu">Добро пожаловать на сайт</h1>
+<h1 >Добро пожаловать на сайт компании</h1>
+<div align="justify" class="page-title">Под нашим брендом выпускаются стильные высокотехнологичные смартфоны и телевизоры,  оригинальные мобильные телефоны и планшеты, а также многофункциональная бытовая техника.
+<br><br><h3>КАК МЫ СОЗДАЕМ ПРОДУКТЫ?</h2>
+<br>
+Наши инженеры, дизайнеры и проектировщики на ежедневной основе тщательно отслеживают самые последние тренды в сфере техники и электроники, чтобы мы могли производить по-настоящему качественную и высокотехнологичную продукцию, которая делает вашу жизнь проще и комфортнее.
+</div>
+<br>
+<div  align="center">
+<img  src="/Store/public/1.jpg" alt="Логотип" width="300px"><br>
+</div>
 
 </html>
