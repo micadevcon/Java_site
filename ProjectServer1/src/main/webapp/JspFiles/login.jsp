@@ -5,24 +5,24 @@
 <html lang="ru" >
   <head>
    <title>Авторизация</title>
-    <link rel="stylesheet" type="text/css" href="/Store/public/login.css">
-    <link rel="stylesheet" type="text/css" href="/Store/public/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/login.css">
+    <link rel="stylesheet" type="text/css" href="/public/style.css">
   </head>
   <body>
     <header>
       <div class="header-top">
-        <a href="/Store/" >главная</a>
-        <a href="/Store/Catalog"> Магазин</a>
-        <a href="/Store/Report"> Связаться с нами</a>
+          <a href="/" >главная</a>
+		        <a href="/Catalog"> Магазин</a>
+		         <a href="/Support" >Поддержка</a></span>
         <div class="header-right">
         <% if(session.getAttribute("current_name") == null)
 	  	{%>
-		<a href="/Store/Autorization"> Авторизация\Регистрация</a>
+		<a href="/Autorization"> Авторизация\Регистрация</a>
 		
 		<%} 
         else{%>
         Пользователь:<%= GetCookie.GetCookie(request, "name")%>
-        <form method="POST" action="/Store/Autorization">
+        <form method="POST" action="/Autorization">
         <input  type="submit" value="Выйти из аккаунта" name="kill">
         </form>
         <%}%>
@@ -32,9 +32,9 @@
     </header>
     <div id="login_container">
     <div id="form_container"  >
-      <form   action="/Store/Autorization" method="post">
+      <form   action="/Autorization" method="post">
  <p class="login-text">Авторизация на сайте</p>
-  <input class='text_input' type="" name="Email"id="Email" placeholder="логин">
+  <input class='text_input' type="text" name="Email"id="Email" placeholder="логин">
   <div class="password">
   <input class='text_input' type="password" name="Password" id="password-input" placeholder="Введите пароль" maxlength="30">
   <a href="#" class="password-control" onclick="return show_hide_password(this,1);"></a>
@@ -42,7 +42,7 @@
   <p class="login-text">Посчитайте пример:<a id="num1">1</a>+<a id="num2">2</a> </p> 
 <input class='text_input'  name="ReturnSum" id="ReturnSum"  maxlength="30">
   <input class='text_input' class="create-account" type="submit" value="Отправить" onclick=" return checkForm()">
-   <p class="login-text"><a  href="/Store/Registration">Регистрация</a> </p> 
+   <p class="login-text"><a  href="/Registration">Регистрация</a> </p> 
   
   </form>
   </div>

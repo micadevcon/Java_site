@@ -2,13 +2,31 @@
 	margin: 0;
 	padding: 0;
 }
-
+ .margT
+ {
+ margin: 0px 0px 0px 10px;
+ }
 body {
 
-	background: url('/Store/public/images/background.png') top left repeat;
+	background: url('images/background.png') top left repeat;
 	margin: 70px 20px 40px 20px;
 }
+.pageSup{
+	margin: 40px 40px 40px 40px;
+}
 
+ul>li {
+	margin: 0 0 0 10px;
+  line-height: 1.5;
+}
+ol>li{
+	 line-height: 2;
+}
+.blockSup{
+	display: flex;
+
+	 justify-content: flex-start;
+}
 .catalog
 {	display: flex;
 	padding: 10px 0px 0 10px;
@@ -48,7 +66,7 @@ body {
 	margin: 100px auto;
 	background: url('images/login_bg1.png') top left no-repeat;
 }
-/* Стили бара header */
+/* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ header */
 .header-top{
 	line-height: 24px;
 	background: #eee;
@@ -82,4 +100,5 @@ body {
 .header-top a:hover{
 	background: #fff;
 }
+
 

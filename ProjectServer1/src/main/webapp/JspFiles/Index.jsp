@@ -5,24 +5,24 @@
 <html>
 <head>
 <meta charset="Cp1251">
-<link rel="stylesheet" type="text/css" href="/Store/public/style.css">
+<link rel="stylesheet" type="text/css" href="/public/style.css">
 <title>Меню</title>
 </head>
 <body>
 	<header>
 		 <div class="header-top">
-		        <a href="/Store/" >главная</a>
-		        <a href="/Store/Catalog"> Магазин</a></span>
-		               <a href="/Store/Report"> Связаться с нами</a>
+		          <a href="/" >главная</a>
+		        <a href="/Catalog"> Магазин</a>
+		         <a href="/Support" >Поддержка</a></span>
 		        <div class="header-right">
 			        <% if(session.getAttribute("current_name") == null)
 				  	{%>
-					<a href="/Store/Autorization"> Авторизация\Регистрация</a>
+					<a href="/Autorization"> Авторизация\Регистрация</a>
 					
 					<%} 
 			        else{%>
 			        Пользователь:<%= GetCookie.GetCookie(request, "name")%>
-			        <form method="POST" action="/Store/Autorization">
+			        <form method="POST" action="/Autorization">
 			        <input  type="submit" value="Выйти из аккаунта" name="kill">
 			        </form>
 			        <%}%>
@@ -40,7 +40,7 @@
 </div>
 <br>
 <div  align="center">
-<img  src="/Store/public/1.jpg" alt="Логотип" width="300px"><br>
+<img  src="/public/1.jpg" alt="Логотип" width="300px"><br>
 </div>
 
 </html>

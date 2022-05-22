@@ -11,10 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import ru.classes.ConnectBase;
 import ru.classes.GetCookie;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -53,25 +53,24 @@ public class Page extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("Cp1251");
+		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("Cp1251");
 //время
 		Date date1 = new Date();
 		SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
-		
+		String query = "INSERT INTO Comments (Notes_id, comment, name, date) VALUES (?, ?, ?, ?);";
 		PrintWriter pw = response.getWriter();
 		Connection connect=ConnectBase.GetConnection();
-		Statement statement =ConnectBase.GetStatementBase(connect);
+		PreparedStatement statement;
 		ResultSet result = null;
         try {
-        	
-        	statement.execute("INSERT INTO 'Comments' ('Notes_id','comment','name','date')VALUES ( "
-        			+ "'"+request.getParameter("id")+"', "
-        			+"'"+request.getParameter("comment")+"', "
-        			+"'"+GetCookie.GetCookie(request, "name")+"', "
-        			+"'"+formatForDateNow.format(date1).toString()+"' "
-        			+");");
-    			
+        	statement = connect.prepareStatement(query);
+            statement.setString(1, request.getParameter("id"));
+            statement.setString(2, request.getParameter("comment"));
+            statement.setString(3, GetCookie.GetCookie(request, "name"));
+            statement.setString(4, formatForDateNow.format(date1).toString());
+            statement.executeUpdate();
+            statement.close();
         			
     			statement.close();
     			connect.close();

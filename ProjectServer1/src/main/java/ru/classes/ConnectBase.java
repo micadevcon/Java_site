@@ -9,11 +9,11 @@ public class ConnectBase {
 	
 	public static Connection GetConnection() {
 		
-		final String URL="jdbc:sqlite:C:/Users/micad/Downloads/учеба/3 курс/2 семестр/СТИП/1-4/Java_site/ProjectServer1/src/main/bd/base.db";
+		final String URL="jdbc:mysql://mysql104.1gb.ru/gb_storemica?useUnicode=true&characterEncoding=Cp1251&user=gb_storemica&password=Rz9YgHX-UKZD";
         Connection connectionBase = null;
         try {
         	try {
-				Class.forName("org.sqlite.JDBC");
+        		Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

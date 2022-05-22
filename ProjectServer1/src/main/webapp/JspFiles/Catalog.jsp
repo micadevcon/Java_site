@@ -6,23 +6,23 @@
 <head>
 <meta charset="Cp1251">
 <title>Личный кабинет</title>
- <link rel="stylesheet" type="text/css" href="/Store/public/style.css">
+ <link rel="stylesheet" type="text/css" href="/public/style.css">
 </head>
 <body>
 <header>
       <div class="header-top">
-        <a href="/Store/" >главная</a>
-        <a href="/Store/Catalog"> Магазин</a>
-                <a href="/Store/Report"> Связаться с нами</a>
+           <a href="/" >главная</a>
+		        <a href="/Catalog"> Магазин</a>
+		         <a href="/Support" >Поддержка</a></span>
         <div class="header-right">
         <% if(session.getAttribute("current_name") == null)
 	  	{%>
-		<a href="/Store/Autorization"> Авторизация\Регистрация</a>
+		<a href="/Autorization"> Авторизация\Регистрация</a>
 		
 		<%} 
         else{%>
         Пользователь:<%= GetCookie.GetCookie(request, "name")%>
-        <form method="POST" action="/Store/Autorization">
+        <form method="POST" action="/Autorization">
         <input  type="submit" value="Выйти из аккаунта" name="kill">
         </form>
         <%}%>
@@ -33,13 +33,13 @@
 		<div>
 		<%if (request.getParameter("usersearch")==null || request.getParameter("usersearch").trim().length()==0)
 		{%>
-			<form action="/Store/Catalog?note=">
+			<form action="/Catalog?note=">
     <input type="text" name="usersearch" id="usersearch" value = "" />
     <button>Искать</button>
 		<%}
 		else
 		{%>
-			<form action="/Store/Catalog?note=<%=request.getParameter("usersearch").trim()%>">
+			<form action="/Catalog?note=<%=request.getParameter("usersearch").trim()%>">
     <input type="text" name="usersearch" id="usersearch" value = "<%=request.getParameter("usersearch").trim()%>" />
     <button>Искать</button>
 		<%}
@@ -68,8 +68,8 @@
 		        	{%>
 		        	
 		        	<div class=cen >
-		        	<img object-fit="cover" height="170" width="170" src="/Store/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
-		        	<a href="/Store/Pages?id=<%=result.getInt("id")%>"><%= result.getString("name") %> </a>
+		        	<img object-fit="cover" height="170" width="170" src="/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
+		        	<a href="/Pages?id=<%=result.getInt("id")%>"><%= result.getString("name") %> </a>
 		        	<p><%= result.getInt("price")  %>₽</p>
 		        	<p>дата добавления:<%= result.getString("data") %></p>
 		        	<br>
@@ -91,8 +91,8 @@
 	        	{%>
 	        	
 	        	<div  align="left" >
-	        	<img src="/Store/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
-	        	<a href="/Store/Pages?id=<%=result.getInt("id")%>"><%= result.getString("name") %> </a>
+	        	<img src="/public/product/<%=result.getString("foto") %>" alt="<%=result.getString("name")%>" width="25%"><br>
+	        	<a href="/Pages?id=<%=result.getInt("id")%>"><%= result.getString("name") %> </a>
 	        	<p><%= result.getInt("price") %>₽</p>
 	        	<p>дата добавления:<%= result.getString("data") %></p>
 	        	<br>

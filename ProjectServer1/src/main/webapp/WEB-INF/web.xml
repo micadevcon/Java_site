@@ -14,6 +14,18 @@
     <servlet-name>Registration</servlet-name>
     <url-pattern>/Registration</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Support</display-name>
+    <servlet-name>Support</servlet-name>
+    <jsp-file>/JspFiles/Support.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Support</servlet-name>
+    <url-pattern>/Support</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>Autorization</display-name>

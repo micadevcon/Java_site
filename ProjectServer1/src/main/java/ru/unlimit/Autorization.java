@@ -59,7 +59,7 @@ public class Autorization extends HttpServlet
 			HttpSession session = request.getSession();
 			session.setAttribute("current_name",null);
 			Cookie cookie = new Cookie("name",null);
-			response.sendRedirect("http://localhost:8080/Store");	
+			response.sendRedirect("http://storemica.jelastic.regruhosting.ru/");	
 		}
 		else 
 		{
@@ -78,13 +78,13 @@ public class Autorization extends HttpServlet
 	        		// за выдачу имени
 	        		Cookie cookie = new Cookie("name",result.getString(1));
 //		    			pw.println("Добрый день:\n");
-		    			cookie.setMaxAge(60);
+		    			cookie.setMaxAge(6000);
 		    			response.addCookie(cookie);
 //		                pw.println(result.getString(1)+"\n");
 		           
 		    			statement.close();
 		    			connect.close();
-		    			response.sendRedirect("http://localhost:8080/Store");	
+		    			response.sendRedirect("http://storemica.jelastic.regruhosting.ru/");	
 		        }
 	        	else 
 	        	{
@@ -95,7 +95,7 @@ public class Autorization extends HttpServlet
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	        		response.sendRedirect("http://localhost:8080/Store/Autorization");	
+	        		response.sendRedirect("http://storemica.jelastic.regruhosting.ru/Autorization");	
 	        		
 	        	}
 	        }

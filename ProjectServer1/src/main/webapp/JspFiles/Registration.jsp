@@ -5,24 +5,24 @@
 <html lang="ru" >
   <head>
    <title>Авторизация</title>
-    <link rel="stylesheet" type="text/css" href="/Store/public/login.css">
-    <link rel="stylesheet" type="text/css" href="/Store/public/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/login.css">
+    <link rel="stylesheet" type="text/css" href="/public/style.css">
   </head>
   <body>
     <header>
       <div class="header-top">
-        <a href="/Store/" >главная</a>
-        <a href="/Store/Catalog"> Магазин</a>
-        <a href="/Store/Report"> Связаться с нами</a>
+          <a href="/" >главная</a>
+		        <a href="/Catalog"> Магазин</a>
+		         <a href="/Support" >Поддержка</a></span>
         <div class="header-right">
         <% if(session.getAttribute("current_name") == null)
 	  	{%>
-		<a href="/Store/Autorization"> Авторизация\Регистрация</a>
+		<a href="/Autorization"> Авторизация\Регистрация</a>
 		
 		<%} 
         else{%>
         Пользователь:<%= GetCookie.GetCookie(request, "name")%>
-        <form method="POST" action="/Store/Autorization">
+        <form method="POST" action="/Autorization">
         <input  type="submit" value="Выйти из аккаунта" name="kill">
         </form>
         <%}%>
@@ -39,7 +39,15 @@
   <input class='text_input' type="" name="Name" id="Name" placeholder="имя">
   <input class='text_input' type="" name="Fname" id="Fname" placeholder="фамилия">
   <input class='text_input' type="" name="Oname" id="Oname" placeholder="отчество">
-  <input class='text_input' type="" name="Gender" id="Gender" placeholder="пол">
+   <div class="login-text ">Пол
+       <nobr  class="login-text" >  <input name="Gender" type="radio" value="М">М </nobr>
+     <nobr class="login-text"> <input name="Gender" type="radio" value="Ж"> Ж </nobr>
+        </div>
+        <div class="margT">
+        
+        </div>
+    
+
   <input class='text_input' type="" name="Organization" id="Organization" placeholder="организация">
   <input class='text_input' type="" name="Number" id="Number" placeholder="номер телефона">
   <input class='text_input' type="" name="Country" id="Country" placeholder="Страна">
@@ -122,3 +130,4 @@ document.getElementById("num2").innerHTML =num2;
 }
 </script>
 </html>
+
