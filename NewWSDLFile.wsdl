@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/SearchWork/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NewWSDLFile" targetNamespace="http://www.example.org/SearchWork/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/SearchWork/">
+            <xsd:include schemaLocation=""></xsd:include>
+            <xsd:include schemaLocation=""></xsd:include>
+            <xsd:element name="SearchWork">
+        <xsd:complexType>
+        	<xsd:sequence maxOccurs="1" minOccurs="0">
+        		<xsd:element name="FIO_student" type="xsd:string"></xsd:element>
+        		<xsd:element name="Date" type="xsd:date"></xsd:element>
+        		<xsd:element name="Discipline" type="xsd:string"></xsd:element>
+        		<xsd:element name="TypeWork" type="xsd:string"></xsd:element>
+        	</xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SearchWorkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+           <xsd:element ref="tns:PaperWork" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+	<xsd:element name="PaperWork">
+        <xsd:complexType>
+        
+        	<xsd:sequence maxOccurs="1" minOccurs="0">
+        		<xsd:element name="FIO_student" type="xsd:string"></xsd:element>
+        		<xsd:element name="Date" type="xsd:string"></xsd:element>
+        		<xsd:element name="Discipline" type="xsd:string"></xsd:element>
+        		<xsd:element name="TypeWork" type="xsd:string"></xsd:element>
+        	</xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="Student">
+        <xsd:complexType>
+
+        	<xsd:sequence maxOccurs="1" minOccurs="0">
+        		<xsd:element name="FIO_tudent" type="xsd:string"></xsd:element>
+
+
+
+                        <xsd:element name="Group" type="xsd:string"></xsd:element>
+                        <xsd:element name="semester" type="xsd:string"></xsd:element>
+        		<xsd:element name="archive" type="xsd:boolean"></xsd:element>
+        	</xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="SearchStudent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="login" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SearchStudentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      		 <xsd:element ref="tns:Student" minOccurs="0" maxOccurs="1"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SearchWorkRequest">
+    <wsdl:part element="tns:SearchWork" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SearchWorkResponse">
+    <wsdl:part element="tns:SearchWorkResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SearchStudentRequest">
+  	<wsdl:part name="parameters" element="tns:SearchStudent"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchStudentResponse">
+  	<wsdl:part name="parameters" element="tns:SearchStudentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Service">
+    <wsdl:operation name="SearchWork">
+      <wsdl:input message="tns:SearchWorkRequest"/>
+      <wsdl:output message="tns:SearchWorkResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="SearchStudent">
+    	<wsdl:input message="tns:SearchStudentRequest"></wsdl:input>
+    	<wsdl:output message="tns:SearchStudentResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NewWSDLFileSOAP" type="tns:Service">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SearchWork">
+      <soap:operation soapAction="http://www.example.org/SearchWork/SearchWork"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WorkService">
+    <wsdl:port binding="tns:NewWSDLFileSOAP" name="WorkServiceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

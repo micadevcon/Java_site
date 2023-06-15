@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/main/java/org/example/www/NewWSDLFile/NewWSDLFileSOAPStub.java=UTF-8
+encoding//src/main/java/org/example/www/NewWSDLFile/NewWSDLFile_PortType.java=UTF-8
+encoding//src/main/java/org/example/www/NewWSDLFile/NewWSDLFile_Service.java=UTF-8
+encoding//src/main/java/org/example/www/NewWSDLFile/NewWSDLFile_ServiceLocator.java=UTF-8
 encoding//src/main/webapp/JspFiles/Catalog.jsp=UTF-8
 encoding//src/main/webapp/JspFiles/Index.jsp=UTF-8
 encoding//src/main/webapp/JspFiles/Page.jsp=UTF-8
